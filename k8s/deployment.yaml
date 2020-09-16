@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-server
+  labels:
+    name: echo-server
+    type: learning
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: echo-server
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        name: echo-server
+    spec:
+      containers:
+        - image: echo-server:1.0
+          name: echo-server
+          imagePullPolicy: Never
+          resources: {}
+          ports:
+            - containerPort: 8080
+status: {}

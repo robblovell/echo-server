@@ -1,0 +1,14 @@
+{
+  "name": "echo-server",
+  "version": "1.0.0",
+  "description": "A server that echo's \"Hello World!\" and some information about the server context back to the user.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "CodeZero",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
+}
