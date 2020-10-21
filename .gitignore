@@ -46,3 +46,4 @@ lib
 /*.tgz
 /package/
 /c6o/drone.app.txt
+kubeconfig.yaml
