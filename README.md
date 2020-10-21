@@ -148,7 +148,7 @@ export DOCKER_HOST="tcp://127.0.0.1:32770"
 export DOCKER_CERT_PATH="/Users/[your home]/.minikube/certs"
 export MINIKUBE_ACTIVE_DOCKERD="minikube"
 ```
-
+You can use kubectx to switch between kubernetes configs in .Kube/kubeconfig.yaml
 ### Kubernetes
 
 Now you can use the kubernetes *deployment* configuration in the kubernetes directory to 

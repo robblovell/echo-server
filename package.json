@@ -9,6 +9,7 @@
   "author": "CodeZero",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "tape": "^5.0.1"
   }
 }

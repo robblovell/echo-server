@@ -20,7 +20,7 @@ describe('Server', () => {
     afterEach(() => (console.log = originalLog))
     beforeEach(() => (console.log = testLog))
 
-    test('handleRequest creates response and logs', async () => {
+    test('Free: handleRequest creates response and logs free', async () => {
         const response = {
             setHeader: jest.fn(),
             writeHead: jest.fn(),
@@ -33,7 +33,26 @@ describe('Server', () => {
         expect(response.write).toBeCalledTimes(2)
         expect(response.end).toBeCalled()
         expect(testLog).toBeCalled()
-        expect(response.write.mock.calls[0][0].slice(0, 12)).toBe('Hello World!')
+        expect(response.write.mock.calls[0][0].slice(0, 16)).toBe('Free Hello World')
+        expect(response.write.mock.calls[0][0].endsWith('Buy the paid version for more information')).toBe(true)
+    })
+
+    test('Paid: handleRequest creates response and logs paid', async () => {
+        const response = {
+            setHeader: jest.fn(),
+            writeHead: jest.fn(),
+            write: jest.fn(),
+            end: jest.fn()
+        }
+        process.env.CZ_EDITION = 'paid'
+        handleRequest({}, response)
+        expect(response.setHeader).toBeCalled()
+        expect(response.writeHead).toBeCalled()
+        expect(response.write).toBeCalledTimes(2)
+        expect(response.end).toBeCalled()
+        expect(testLog).toBeCalled()
+        expect(response.write.mock.calls[0][0].slice(0, 16)).toBe('Paid Hello World')
+        expect(response.write.mock.calls[0][0].endsWith('Paid')).toBe(true)
     })
 
     test('Server Starts on load.', async () => {

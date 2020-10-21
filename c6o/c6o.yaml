@@ -1,0 +1,80 @@
+name: Echo Server
+appId: echo-server-3
+package: '@provisioner/appengine'
+icon: icon.svg
+description:
+  Ever want to meet an server that is a good listener? Look no further, connect with your inner narcissist and buy echo server today!
+summary:
+  Echo server just replies back what you sent it.
+category: dev-tools
+keywords:
+  - Developer
+  - Tools
+
+repo: https://github.com/robblovell/echo-server
+license: https://www.apache.org/licenses/LICENSE-2.0.html
+support: https://github.com/robblovell/echo-server/issues
+
+provisioner:
+  repo: https://github.com/robblovell/echo-server
+  support: https://github.com/robblovell/echo-server/issues
+
+#editions:
+#  - name: free
+#    status: public
+#    default: true
+#    spec:
+#      routes:
+#        - type: http
+#          targetService: echo-server-free
+#      provisioner:
+#        package: '@provisioner/appengine'
+#        ui: ignore
+#        name: echo-server-free
+#        image: 'robblovell/echo-server:1.0'
+#        automated: true
+#        port: 8080
+#      marina:
+#        launch:
+#          type: inline
+#  - name: paid
+#    status: public
+#    default: true
+#    spec:
+#      routes:
+#        - type: http
+#          targetService: echo-server-paid
+#      provisioner:
+#        package: '@provisioner/appengine'
+#        ui: ignore
+#        name: echo-server-paid
+#        image: 'robblovell/echo-server:1.0'
+#        automated: true
+#        port: 8080
+#      marina:
+#        launch:
+#          type: inline
+#
+editions:
+  - name: free
+    status: public
+    default: true
+    spec: &spec
+      routes:
+        - type: http
+          targetService: echo-server
+      provisioner:
+        package: '@provisioner/appengine'
+        ui: ignore
+        name: echo-server
+        image: 'robblovell/echo-server:1.0'
+        automated: true
+        port: 8080
+      marina:
+        launch:
+          type: inline
+  - name: paid
+    status: public
+    default: true
+    spec:
+      <<: *spec
