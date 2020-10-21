@@ -1,15 +1,18 @@
 {
   "name": "echo-server",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A server that echo's \"Hello World!\" and some information about the server context back to the user.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robblovell/echo-server"
+  },
   "scripts": {
     "test": "jest"
   },
-  "author": "CodeZero",
+  "author": "Robb Lovell",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^26.4.2",
-    "tape": "^5.0.1"
+    "jest": "^26.4.2"
   }
 }

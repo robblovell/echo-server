@@ -67,7 +67,7 @@ editions:
         package: '@provisioner/appengine'
         ui: ignore
         name: echo-server
-        image: 'robblovell/echo-server:1.0'
+        image: 'robblovell/echo-server:2.0'
         automated: true
         port: 8080
       marina:
