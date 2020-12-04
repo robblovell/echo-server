@@ -20,6 +20,29 @@ provisioner:
   support: https://github.com/robblovell/echo-server/issues
 
 editions:
+
+  - name: echoserver
+    editionId: echoserver
+    status: public
+    default: true
+    spec:
+      routes:
+        - type: http
+          targetService: echoserver
+      provisioner:
+        name: echoserver
+        tag-prefix: appengine
+        package: '@provisioner/appengine'
+        image: 'robblovell/echo-server:2.1'
+        automated: true
+        port:
+          - port: 8080
+            name: echoserver
+            protocol: TCP
+      marina:
+        launch:
+          type: inline
+
   - name: echoserverfree
     editionId: echoserverfree
     status: public
@@ -64,28 +87,6 @@ editions:
         launch:
           type: inline
 
-  - name: echoserverenterprise
-    editionId: echoserverenterprise
-    status: public
-    default: true
-    spec:
-      routes:
-        - type: http
-          targetService: echoserver
-      provisioner:
-        name: echoserver
-        tag-prefix: appengine
-        package: '@provisioner/appengine'
-        image: 'robblovell/echo-server:2.1'
-        automated: true
-        port:
-          - port: 8080
-            name: echoserver
-            protocol: TCP
-      marina:
-        launch:
-          type: inline
-
   - name: echoservercommunity
     editionId: echoservercommunity
     status: public
@@ -96,49 +97,6 @@ editions:
           targetService: echoserver
       provisioner:
         name: echoserver
-        tag-prefix: appengine
-        package: '@provisioner/appengine'
-        image: 'robblovell/echo-server:2.1'
-        automated: true
-        port:
-          - port: 8080
-            name: echoserver
-            protocol: TCP
-      marina:
-        launch:
-          type: inline
-
-  - name: echoserverplain
-    editionId: echoserverplain
-    status: public
-    default: true
-    spec:
-      routes:
-        - type: http
-          targetService: echoserver
-      provisioner:
-        name: echoserver
-        tag-prefix: appengine
-        package: '@provisioner/appengine'
-        image: 'robblovell/echo-server:2.1'
-        automated: true
-        port:
-          - port: 8080
-            name: echoserver
-            protocol: TCP
-      marina:
-        launch:
-          type: inline
-
-  - name: echoserver
-    editionId: echoserver
-    status: public
-    default: true
-    spec:
-      routes:
-        - type: http
-          targetService: echoserver
-      provisioner:
         tag-prefix: appengine
         package: '@provisioner/appengine'
         image: 'robblovell/echo-server:2.1'
