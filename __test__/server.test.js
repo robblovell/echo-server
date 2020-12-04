@@ -34,7 +34,7 @@ describe('Server', () => {
         expect(response.end).toBeCalled()
         expect(testLog).toBeCalled()
         expect(response.write.mock.calls[0][0].slice(0, 16)).toBe('Free Hello World')
-        expect(response.write.mock.calls[0][0].endsWith('Buy the paid version for more information')).toBe(true)
+        expect(response.write.mock.calls[0][0].includes('Buy the paid version for more information')).toBe(true)
     })
 
     test('Paid: handleRequest creates response and logs paid', async () => {
@@ -52,7 +52,7 @@ describe('Server', () => {
         expect(response.end).toBeCalled()
         expect(testLog).toBeCalled()
         expect(response.write.mock.calls[0][0].slice(0, 16)).toBe('Paid Hello World')
-        expect(response.write.mock.calls[0][0].endsWith('Paid')).toBe(true)
+        expect(response.write.mock.calls[0][0].includes('Paid')).toBe(true)
     })
 
     test('Server Starts on load.', async () => {

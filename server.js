@@ -4,7 +4,6 @@ let requests = 0
 const startTime = new Date()
 const host = process.env.HOSTNAME || 'unknown'
 
-
 const handleRequest = (request, response) => {
     const czEdition = process.env.CZ_EDITION || 'free'
     const czApp = process.env.CZ_APP || 'echo-server'
@@ -15,7 +14,9 @@ const handleRequest = (request, response) => {
         (czEdition == 'paid' ?
         ' | Total Requests: ' + ++requests +
         ' | App Uptime: ' + ((new Date() - startTime) / 1000) + ' seconds' +
-        ' | Log Time: ' + new Date() +'Paid' : ' | Buy the paid version for more information')
+        ' | Log Time: ' + new Date() + '\n' + 'Paid' : ' | Buy the paid version for more information') + '\n' +
+        ' | Headers: ' + JSON.stringify(request.headers,null,2) + '\n' +
+        ' | Parameters: ' + JSON.stringify(request.url,null,2)
 
     response.setHeader('Content-Type', 'text/plain')
     response.writeHead(200)

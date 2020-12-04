@@ -1,5 +1,5 @@
 name: Echo Server
-appId: echo-server-3
+appId: echoserver
 package: '@provisioner/appengine'
 icon: icon.svg
 description:
@@ -19,19 +19,151 @@ provisioner:
   repo: https://github.com/robblovell/echo-server
   support: https://github.com/robblovell/echo-server/issues
 
+editions:
+  - name: echoserverfree
+    editionId: echoserverfree
+    status: public
+    default: true
+    spec:
+      routes:
+        - type: http
+          targetService: echoserver
+      provisioner:
+        name: echoserver
+        tag-prefix: appengine
+        package: '@provisioner/appengine'
+        image: 'robblovell/echo-server:2.1'
+        automated: true
+        port:
+          - port: 8080
+            name: echoserver
+            protocol: TCP
+      marina:
+        launch:
+          type: inline
+
+  - name: echoserverpro
+    editionId: echoserverpro
+    status: public
+    default: true
+    spec:
+      routes:
+        - type: http
+          targetService: echoserver
+      provisioner:
+        name: echoserver
+        tag-prefix: appengine
+        package: '@provisioner/appengine'
+        image: 'robblovell/echo-server:2.1'
+        automated: true
+        port:
+          - port: 8080
+            name: echoserver
+            protocol: TCP
+      marina:
+        launch:
+          type: inline
+
+  - name: echoserverenterprise
+    editionId: echoserverenterprise
+    status: public
+    default: true
+    spec:
+      routes:
+        - type: http
+          targetService: echoserver
+      provisioner:
+        name: echoserver
+        tag-prefix: appengine
+        package: '@provisioner/appengine'
+        image: 'robblovell/echo-server:2.1'
+        automated: true
+        port:
+          - port: 8080
+            name: echoserver
+            protocol: TCP
+      marina:
+        launch:
+          type: inline
+
+  - name: echoservercommunity
+    editionId: echoservercommunity
+    status: public
+    default: true
+    spec:
+      routes:
+        - type: http
+          targetService: echoserver
+      provisioner:
+        name: echoserver
+        tag-prefix: appengine
+        package: '@provisioner/appengine'
+        image: 'robblovell/echo-server:2.1'
+        automated: true
+        port:
+          - port: 8080
+            name: echoserver
+            protocol: TCP
+      marina:
+        launch:
+          type: inline
+
+  - name: echoserverplain
+    editionId: echoserverplain
+    status: public
+    default: true
+    spec:
+      routes:
+        - type: http
+          targetService: echoserver
+      provisioner:
+        name: echoserver
+        tag-prefix: appengine
+        package: '@provisioner/appengine'
+        image: 'robblovell/echo-server:2.1'
+        automated: true
+        port:
+          - port: 8080
+            name: echoserver
+            protocol: TCP
+      marina:
+        launch:
+          type: inline
+
+  - name: echoserver
+    editionId: echoserver
+    status: public
+    default: true
+    spec:
+      routes:
+        - type: http
+          targetService: echoserver
+      provisioner:
+        tag-prefix: appengine
+        package: '@provisioner/appengine'
+        image: 'robblovell/echo-server:2.1'
+        automated: true
+        port:
+          - port: 8080
+            name: echoserver
+            protocol: TCP
+      marina:
+        launch:
+          type: inline
+
 #editions:
 #  - name: free
 #    status: public
 #    default: true
-#    spec:
+#    spec: &spec
 #      routes:
 #        - type: http
-#          targetService: echo-server-free
+#          targetService: echo-server
 #      provisioner:
 #        package: '@provisioner/appengine'
 #        ui: ignore
-#        name: echo-server-free
-#        image: 'robblovell/echo-server:1.0'
+#        name: echo-server
+#        image: 'robblovell/echo-server:2.1'
 #        automated: true
 #        port: 8080
 #      marina:
@@ -40,41 +172,7 @@ provisioner:
 #  - name: paid
 #    status: public
 #    default: true
+#    price:
+#      unit_amount: 100
 #    spec:
-#      routes:
-#        - type: http
-#          targetService: echo-server-paid
-#      provisioner:
-#        package: '@provisioner/appengine'
-#        ui: ignore
-#        name: echo-server-paid
-#        image: 'robblovell/echo-server:1.0'
-#        automated: true
-#        port: 8080
-#      marina:
-#        launch:
-#          type: inline
-#
-editions:
-  - name: free
-    status: public
-    default: true
-    spec: &spec
-      routes:
-        - type: http
-          targetService: echo-server
-      provisioner:
-        package: '@provisioner/appengine'
-        ui: ignore
-        name: echo-server
-        image: 'robblovell/echo-server:2.0'
-        automated: true
-        port: 8080
-      marina:
-        launch:
-          type: inline
-  - name: paid
-    status: public
-    default: true
-    spec:
-      <<: *spec
+#      <<: *spec
