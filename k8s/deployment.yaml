@@ -1,26 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: echo-server
+  name: echo-server-deployment
   labels:
-    name: echo-server
+    name: echo-server-deployment
     type: learning
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      name: echo-server
-  strategy: {}
+      name: echo-server-pod
+
   template:
     metadata:
       labels:
-        name: echo-server
+        name: echo-server-pod
+
     spec:
       containers:
-        - image: echo-server:1.0
-          name: echo-server
-          imagePullPolicy: Never
-          resources: {}
+        - name: echo-server
+          image: 'robblovell/echo-server:2.2'
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
-status: {}

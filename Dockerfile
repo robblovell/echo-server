@@ -12,7 +12,7 @@ WORKDIR /app
 # left here for reference.
 #COPY package*.json ./
 #RUN npm install --only=production
-COPY --from=nodebuild /app/server.js ./
-#RUN rm -rf pcakage*.json
+COPY --from=nodebuild /app/src/server.js ./
+#RUN rm -rf package*.json
 EXPOSE 8080
 ENTRYPOINT node /app/server.js

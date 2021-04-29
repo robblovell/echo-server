@@ -1,19 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: echo-server
+  name: echo-service
   labels:
-    name: echo-server
+    name: echo-server-service
     role: server
 spec:
   type: NodePort
   ports:
-    - port: 8880
-      name: http
+    - protocol: TCP
+      port: 8000
       targetPort: 8080
   selector:
-    name: echo-server
-
-https://hub:
-  codezero:
-    io/marketplace#access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9:eyJpYXQiOjE2MDMzMDcwODYsImV4cCI6MTYwNTg5OTA4NiwiYXVkIjoiaHR0cHM6Ly9jb2RlemVyby5pbyIsImlzcyI6IkNvZGVaZXJvIFRlY2hub2xvZ2llcyBJbmMuIiwic3ViIjoiMDFFSFozWjIyU0hYRUE5Q0o3UDlRS1ZXOVEiLCJqdGkiOiJlMjc2ZWQwYi1hN2VkLTQ2MzItOGE3Zi04NDg3Mzg5ODkxZDEifQ:Hx8KipLrAta7XaXD7tUWR-G5flRqORfkAbCuYdyk5fw:
+    name: echo-server-pod

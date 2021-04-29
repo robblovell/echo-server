@@ -2,17 +2,24 @@
   "name": "echo-server",
   "version": "2.1.0",
   "description": "A server that echo's \"Hello World!\" and some information about the server context back to the user.",
-  "main": "server.js",
+  "main": "src/server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/robblovell/echo-server"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage",
+    "test-unit": "jest",
+    "test-unit-coverage": "jest --coverage"
   },
   "author": "Robb Lovell",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^26.4.2"
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "javascript-obfuscator": "^1.10.2",
+    "jest": "^26.4.2",
+    "jest-html-reporters": "^2.0.3",
+    "tslint-config-airbnb-base": "^0.3.0"
   }
 }

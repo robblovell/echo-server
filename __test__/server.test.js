@@ -12,9 +12,25 @@ jest.mock('http', () => {
 const http = require('http')
 const createServerSpy = jest.spyOn(http, 'createServer')
 const listenSpy = jest.spyOn(http, 'listenMock')
-const { handleRequest } = require('../server')
+process.env.HOSTNAME = 'host'
+const SOME_DATE = 'Tue May 14 2019 04:01:58 GMT-0700'
+// jest
+//     .spyOn(global.Date, 'now')
+//     .mockImplementationOnce(() =>
+//         new Date(SOME_DATE).valueOf()
+//     );
+
+const mockDate = new Date(SOME_DATE)
+const spy = jest
+    .spyOn(global, 'Date')
+    .mockImplementation(() => mockDate)
+
+const {handleRequest, handler} = require('../src/server')
 
 describe('Server', () => {
+    const SOME_URL = 'url'
+    const SOME_HEADERS = 'headers'
+    const SOME_REQUEST = {url: SOME_URL, headers: SOME_HEADERS}
     const originalLog = console.log
     const testLog = jest.fn()
     afterEach(() => (console.log = originalLog))
@@ -27,7 +43,7 @@ describe('Server', () => {
             write: jest.fn(),
             end: jest.fn()
         }
-        handleRequest({}, response)
+        handleRequest(SOME_REQUEST, response)
         expect(response.setHeader).toBeCalled()
         expect(response.writeHead).toBeCalled()
         expect(response.write).toBeCalledTimes(2)
@@ -45,7 +61,7 @@ describe('Server', () => {
             end: jest.fn()
         }
         process.env.CZ_EDITION = 'paid'
-        handleRequest({}, response)
+        handleRequest(SOME_REQUEST, response)
         expect(response.setHeader).toBeCalled()
         expect(response.writeHead).toBeCalled()
         expect(response.write).toBeCalledTimes(2)
@@ -59,6 +75,21 @@ describe('Server', () => {
         expect(createServerSpy).toBeCalled()
         expect(listenSpy).toBeCalled()
         expect(testLog).toBeCalled()
+    })
+
+    test('handler', () => {
+        const dateTime = new Date().toString()
+        const startTime = new Date()
+        handler()
+        expect(console.log).toHaveBeenNthCalledWith(1, 'Free Hello World | Running On: host | App: echo-server | Edition: free\n' +
+            ' Free: Buy the paid version for more information\n' +
+            ' | Headers: headers\n' +
+            ' | Parameters: url')
+        expect(console.log).toHaveBeenNthCalledWith(2, 'Paid Hello World! | Running On: host | App: echo-server | Edition: paid\n' +
+            ' Paid: Total Requests: 1 | App Uptime: 0 seconds | Log Time: ' + dateTime + '\n' +
+            ' | Headers: headers\n' +
+            ' | Parameters: url')
+        expect(console.log).toHaveBeenNthCalledWith(3, 'Echo Server App Started At:', startTime, '| Running On: ', process.env.HOSTNAME)
     })
 })
 

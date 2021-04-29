@@ -52,18 +52,28 @@ Running On: 73825806f530 | Total Requests: 3 | App Uptime: 10688.865 seconds | L
 ```
 # Look at the images that have been created:
 > docker images
+
 # Look at running images:
 > docker ps
+
 # Stop a running image: (uses the id given in docker ps)
 > docker stop [container name]
-# Kill a running image: (uses the id given in docker ps)
-> docker kill [running container id]
-# Stale or dormant docker images sometimes old onto resources:
-> docker system prune --all
+
 # Look at what's in the working directory of your container.
 > docker exec -t echo-server /bin/sh -c ls
+
 # Check to make sure you haven't copied in development depenedencies!.
 > docker exec -t echo-server /bin/sh -c 'ls node_modules'
+
+# Killing off things
+> docker container prune -f && docker image prune -f
+
+# Kill a running image: (uses the id given in docker ps)
+> docker kill [running container id]
+
+# Stale or dormant docker images sometimes old onto resources:
+> docker system prune --all
+
 ```
 ### Publishing
 ```
@@ -86,6 +96,21 @@ cb98af462e9c: Pushed
 9c733f70df77: Mounted from library/node 
 3e207b409db3: Mounted from library/node 
 1.0: digest: sha256:c4372a0e041132ae5447c77b1e9a466d1aab6c77b57b318d2d9419f9e278f2ef size: 1572
+```
+
+#### M1 Mac publishing
+
+```bash
+> docker buildx ls
+
+NAME/NODE DRIVER/ENDPOINT STATUS  PLATFORMS
+default * docker
+default default         running linux/arm64, linux/amd64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/arm/v7, linux/arm/v6
+> docker build --tag robblovell/echo-server:2.2 --platform linux/amd64 .
+```
+
+```
+docker buildx inspect — bootstrap
 ```
 ### Troubleshooting
 
@@ -147,6 +172,12 @@ export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="tcp://127.0.0.1:32770"
 export DOCKER_CERT_PATH="/Users/[your home]/.minikube/certs"
 export MINIKUBE_ACTIVE_DOCKERD="minikube"
+```
+
+#### Useful docker commands
+
+```aidl
+docker tag $(docker images $DOCKER_NAME --format "{{.ID}}" | head -1) $DOCKER_NAME:$USER
 ```
 You can use kubectx to switch between kubernetes configs in .Kube/kubeconfig.yaml
 ### Kubernetes

@@ -20,25 +20,18 @@ provisioner:
   support: https://github.com/robblovell/echo-server/issues
 
 editions:
-
   - name: echoserver
     editionId: echoserver
-    status: public
-    default: true
+    status: private
     spec:
       routes:
         - type: http
           targetService: echoserver
       provisioner:
-        name: echoserver
         tag-prefix: appengine
         package: '@provisioner/appengine'
         image: 'robblovell/echo-server:2.1'
-        automated: true
-        port:
-          - port: 8080
-            name: echoserver
-            protocol: TCP
+        ports: 8080
       marina:
         launch:
           type: inline
@@ -46,7 +39,6 @@ editions:
   - name: echoserverfree
     editionId: echoserverfree
     status: public
-    default: true
     spec:
       routes:
         - type: http
@@ -56,11 +48,7 @@ editions:
         tag-prefix: appengine
         package: '@provisioner/appengine'
         image: 'robblovell/echo-server:2.1'
-        automated: true
-        port:
-          - port: 8080
-            name: echoserver
-            protocol: TCP
+        ports: 8080
       marina:
         launch:
           type: inline
@@ -68,7 +56,6 @@ editions:
   - name: echoserverpro
     editionId: echoserverpro
     status: public
-    default: true
     spec:
       routes:
         - type: http
@@ -78,36 +65,29 @@ editions:
         tag-prefix: appengine
         package: '@provisioner/appengine'
         image: 'robblovell/echo-server:2.1'
-        automated: true
-        port:
-          - port: 8080
-            name: echoserver
-            protocol: TCP
+        ports: 8080
       marina:
         launch:
           type: inline
 
-  - name: echoservercommunity
-    editionId: echoservercommunity
-    status: public
-    default: true
-    spec:
-      routes:
-        - type: http
-          targetService: echoserver
-      provisioner:
-        name: echoserver
-        tag-prefix: appengine
-        package: '@provisioner/appengine'
-        image: 'robblovell/echo-server:2.1'
-        automated: true
-        port:
-          - port: 8080
-            name: echoserver
-            protocol: TCP
-      marina:
-        launch:
-          type: inline
+#  - name: echoservercommunity
+#    editionId: echoservercommunity
+#    status: public
+#    price:
+#      unit_amount: 100
+#    spec:
+#      routes:
+#        - type: http
+#          targetService: echoserver
+#      provisioner:
+#        name: echoserver
+#        tag-prefix: appengine
+#        package: '@provisioner/appengine'
+#        image: 'robblovell/echo-server:2.1'
+#        ports: 8080
+#      marina:
+#        launch:
+#          type: inline
 
 #editions:
 #  - name: free
