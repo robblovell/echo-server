@@ -3,12 +3,14 @@ const http = require('http')
 let requests = 0
 const startTime = new Date()
 const host = process.env.HOSTNAME || 'unknown'
+const version = process.env.VERSION || 'Version 2.2'
 
 const handleRequest = (request, response) => {
     const czEdition = process.env.CZ_EDITION || 'free'
     const czApp = process.env.CZ_APP || 'echo-server'
     const logMessage = (czEdition === 'paid' ? 'Paid Hello World!' : 'Free Hello World') +
         ' | Running On: ' + host +
+        ' | Version: ' + version +
         ' | App: ' + czApp +
         ' | Edition: ' + czEdition + '\n' +
         (czEdition === 'paid' ?
@@ -24,6 +26,7 @@ const handleRequest = (request, response) => {
 
     response.setHeader('Content-Type', 'text/plain')
     response.writeHead(200)
+    response.write(version)
     response.write(logMessage)
     response.write(host)
     response.end(' | v=1')

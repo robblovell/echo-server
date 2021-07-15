@@ -109,6 +109,10 @@ default default         running linux/arm64, linux/amd64, linux/riscv64, linux/p
 > docker build --tag robblovell/echo-server:2.2 --platform linux/amd64 .
 ```
 
+For M1:
+```bash
+> docker build --tag robblovell/echo-server:2.2 --platform linux/arm64 .
+```
 ```
 docker buildx inspect — bootstrap
 ```
