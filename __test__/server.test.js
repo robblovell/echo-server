@@ -46,11 +46,11 @@ describe('Server', () => {
         handleRequest(SOME_REQUEST, response)
         expect(response.setHeader).toBeCalled()
         expect(response.writeHead).toBeCalled()
-        expect(response.write).toBeCalledTimes(2)
+        expect(response.write).toBeCalledTimes(3)
         expect(response.end).toBeCalled()
         expect(testLog).toBeCalled()
-        expect(response.write.mock.calls[0][0].slice(0, 16)).toBe('Free Hello World')
-        expect(response.write.mock.calls[0][0].includes('Buy the paid version for more information')).toBe(true)
+        expect(response.write.mock.calls[1][0].slice(0, 16)).toBe('Free Hello World')
+        expect(response.write.mock.calls[1][0].includes('Buy the paid version for more information')).toBe(true)
     })
 
     test('Paid: handleRequest creates response and logs paid', async () => {
@@ -64,11 +64,11 @@ describe('Server', () => {
         handleRequest(SOME_REQUEST, response)
         expect(response.setHeader).toBeCalled()
         expect(response.writeHead).toBeCalled()
-        expect(response.write).toBeCalledTimes(2)
+        expect(response.write).toBeCalledTimes(3)
         expect(response.end).toBeCalled()
         expect(testLog).toBeCalled()
-        expect(response.write.mock.calls[0][0].slice(0, 16)).toBe('Paid Hello World')
-        expect(response.write.mock.calls[0][0].includes('Paid')).toBe(true)
+        expect(response.write.mock.calls[1][0].slice(0, 16)).toBe('Paid Hello World')
+        expect(response.write.mock.calls[1][0].includes('Paid')).toBe(true)
     })
 
     test('Server Starts on load.', async () => {
@@ -81,11 +81,11 @@ describe('Server', () => {
         const dateTime = new Date().toString()
         const startTime = new Date()
         handler()
-        expect(console.log).toHaveBeenNthCalledWith(1, 'Free Hello World | Running On: host | App: echo-server | Edition: free\n' +
+        expect(console.log).toHaveBeenNthCalledWith(1, 'Free Hello World | Running On: host | Version: Version 2.2 | App: echo-server | Edition: free\n' +
             ' Free: Buy the paid version for more information\n' +
             ' | Headers: headers\n' +
             ' | Parameters: url')
-        expect(console.log).toHaveBeenNthCalledWith(2, 'Paid Hello World! | Running On: host | App: echo-server | Edition: paid\n' +
+        expect(console.log).toHaveBeenNthCalledWith(2, 'Paid Hello World! | Running On: host | Version: Version 2.2 | App: echo-server | Edition: paid\n' +
             ' Paid: Total Requests: 1 | App Uptime: 0 seconds | Log Time: ' + dateTime + '\n' +
             ' | Headers: headers\n' +
             ' | Parameters: url')
